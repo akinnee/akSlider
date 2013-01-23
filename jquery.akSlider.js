@@ -42,7 +42,7 @@
 		var currentSlide = 1;
 
 		var initialize = function() {
-			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .nav-to[data-slide="' + currentSlide + '"]').addClass('current');
+			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .akslider-nav-to[data-slide="' + currentSlide + '"]').addClass('akslider-current');
 			self.find('.akslider-nav-back').click(navBack);
 			self.find('.akslider-nav-forward').click(navForward);
 			self.find('.akslider-nav-to').click(navTo);
@@ -55,8 +55,8 @@
 			if (typeof currentSlide == 'number') currentSlide = currentSlide;
 		};
 		var navigateTo = function(slide) {
-			self.find('.akslider-slide.current, .nav-to.current').removeClass('current');
-			self.find('.akslider-slide[data-slide="' + slide + '"], .nav-to[data-slide="' + slide + '"]').addClass('current');
+			self.find('.akslider-slide.akslider-current, .akslider-nav-to.akslider-current').removeClass('akslider-current');
+			self.find('.akslider-slide[data-slide="' + slide + '"], .akslider-nav-to[data-slide="' + slide + '"]').addClass('akslider-current');
 			updateCurrentSlide();
 		};
 		var navBack = function() {
