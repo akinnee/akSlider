@@ -8,6 +8,16 @@
 
 		var self = this;
 
+		var optionDefaults = {
+			showArrows: 'onhover',
+			showNavButtons: 'always'
+		};
+
+		// apply options defaults where option was not specified
+		$.each(optionDefaults, function(key, value) {
+			if (!options.key) options[key] = value;
+		});
+
 		var generateMarkup = function() {
 			var controls = '<div class="akslider-controls">';
 			controls += '<div class="akslider-nav-back"><div class="akslider-indicator"><span class="akslider-icon"></span></div></div>';
@@ -44,6 +54,12 @@
 			self.find('.akslider-nav-back').click(navBack);
 			self.find('.akslider-nav-forward').click(navForward);
 			self.find('.akslider-nav-to').click(navTo);
+
+			if (options.showArrows == 'onhover')
+				self.addClass('akslider-show-arrows-onhover');
+
+			if (options.showNavButtons == 'onhover')
+				self.addClass('akslider-show-nav-buttons-onhover');
 		};
 		var slideCount = function() {
 			return self.find('.akslider-slide').length;
