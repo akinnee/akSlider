@@ -14,9 +14,7 @@
 			controls += '<div class="akslider-nav-forward"><div class="akslider-indicator"><span class="akslider-icon"></span></div></div>';
 			controls += '<ul class="akslider-slide-selectors"></ul>';
 			controls += '</div>';
-			var slideSelector = '<li class="akslider-nav-to" data-slide="1">';
 			var slideholder = '<ul class="akslider-slides"></ul>';
-			var slide = '<li class="akslider-slide" data-slide="1"></li>';
 
 			self.html('').append(controls).append(slideholder);
 
@@ -51,8 +49,8 @@
 			return self.find('.akslider-slide').length;
 		};
 		var updateCurrentSlide = function() {
-			var currentSlide = parseInt(self.find('.akslider-slide.current').attr('data-slide'), 10);
-			if (typeof currentSlide == 'number') currentSlide = currentSlide;
+			var slide = parseInt(self.find('.akslider-slide.akslider-current').attr('data-slide'), 10);
+			if (typeof slide == 'number') currentSlide = slide;
 		};
 		var navigateTo = function(slide) {
 			self.find('.akslider-slide.akslider-current, .akslider-nav-to.akslider-current').removeClass('akslider-current');
