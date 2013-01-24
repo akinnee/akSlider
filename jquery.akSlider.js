@@ -10,7 +10,9 @@
 
 		var optionDefaults = {
 			showArrows: 'onhover',
-			showNavButtons: 'always'
+			showNavButtons: 'always',
+			autoAdvance: false,
+			pauseOnNav: true
 		};
 
 		// apply options defaults where option was not specified
@@ -28,6 +30,7 @@
 
 			self.html('').append(controls).append(slideholder);
 
+			// build slides and navigation buttons
 			$.each(options.slides, function(index, value) {
 				var slideSelector = $('<li>').addClass('akslider-nav-to').attr('data-slide', index);
 				self.find('.akslider-slide-selectors').append(slideSelector);
@@ -48,6 +51,7 @@
 		generateMarkup();
 
 		var currentSlide = 1;
+		var paused = false;
 
 		var initialize = function() {
 			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .akslider-nav-to[data-slide="' + currentSlide + '"]').addClass('akslider-current');
@@ -68,28 +72,40 @@
 			var slide = parseInt(self.find('.akslider-slide.akslider-current').attr('data-slide'), 10);
 			if (typeof slide == 'number') currentSlide = slide;
 		};
-		var navigateTo = function(slide) {
+		var navigateTo = function(e, slide) {
+			if (e && options.pauseOnNav)
+				paused = true;
+
 			self.find('.akslider-slide.akslider-current, .akslider-nav-to.akslider-current').removeClass('akslider-current');
 			self.find('.akslider-slide[data-slide="' + slide + '"], .akslider-nav-to[data-slide="' + slide + '"]').addClass('akslider-current');
 			updateCurrentSlide();
 		};
-		var navBack = function() {
+		var navBack = function(e) {
 			if (currentSlide == 1)
-				navigateTo(slideCount());
+				navigateTo(e, slideCount());
 			else
-				navigateTo((currentSlide - 1));
+				navigateTo(e, (currentSlide - 1));
 		};
-		var navForward = function() {
+		var navForward = function(e) {
 			if (currentSlide == slideCount())
-				navigateTo(1);
+				navigateTo(e, 1);
 			else
-				navigateTo((currentSlide + 1));
+				navigateTo(e, (currentSlide + 1));
 		};
 		var navTo = function(e) {
-			navigateTo($(e.target).attr('data-slide'));
+			navigateTo(e, $(e.target).attr('data-slide'));
+		};
+		var autoAdvance = function() {
+			if (!paused) {
+				navForward();
+				window.setTimeout(autoAdvance, options.autoAdvance);
+			}
 		};
 
 		initialize();
+
+		if (options.autoAdvance)
+			window.setTimeout(autoAdvance, options.autoAdvance);
 
 	};
 

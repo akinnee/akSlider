@@ -20,6 +20,18 @@ Options
 ##### Other Values
 	onhover
 
+#### autoAdvance
+##### Default
+	false
+##### Other Values
+	any millisecond value
+
+#### pauseOnNav
+##### Default
+	true
+##### Other Values
+	false
+
 Usage
 -----
 
