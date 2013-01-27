@@ -3,36 +3,36 @@ akSlider
 
 WORK IN PROGESS!!!
 
-Lightweight, object oriented, jQuery based slider
+Lightweight, object-oriented, jQuery-based slider
 
 Options
 -----
 
-#### showArrows
-##### Default
-	onhover
-##### Other Values
-	always
+**showArrows**
+* Default
+	* onhover
+* Other Values
+	* always
 
-#### showNavButtons
-##### Default
-	always
-##### Other Values
-	onhover
+**showNavButtons**
+* Default
+	* always
+* Other Values
+	* onhover
 
-#### autoAdvance
-##### Default
-	false
-##### Other Values
-	any millisecond value
+**autoAdvance**
+* Default
+	* false
+* Other Values
+	* any millisecond value
 
-#### pauseOnNav
-##### Default
-	true
-##### Other Values
-	false
+**pauseOnNav**
+* Default
+	* true
+* Other Values
+	* false
 
-Usage
+Usage Example
 -----
 
 	$('.tutorial-slideshow').akSlider({
@@ -43,7 +43,8 @@ Usage
 			2: {
 				image: '/path/to/image.png'
 			}
-		}
+		},
+		showArrows: onhover
 	    // other options here
 	});
 
