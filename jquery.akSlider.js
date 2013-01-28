@@ -40,7 +40,7 @@
 				var content;
 				if (value.image)
 					content = $('<img>').attr('src', value.image);
-				if (value.html)
+				else if (value.html)
 					content = value.html;
 
 				if (content)
