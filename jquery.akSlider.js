@@ -12,8 +12,8 @@
 			width: 640,
 			showArrows: 'onhover',
 			customArrowSelectors: {
-				left: false,
-				right: false
+				back: false,
+				forward: false
 			},
 			showNavButtons: true,
 			autoAdvance: false,
