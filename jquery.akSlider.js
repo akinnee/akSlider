@@ -3,15 +3,19 @@
 	$.fn.akSlider = function(options) {
 		if (!options)
 			$.error('Must supply options to akSlider!');
-		if (!options.slides)
-			$.error('Must supply options.slides to akSlider!');
+		if (!options.slides || !$.isArray(options.slides))
+			$.error('Must supply options.slides to akSlider, and it must be an Array!');
 
 		var self = this;
 
 		var optionDefaults = {
 			width: 640,
 			showArrows: 'onhover',
-			showNavButtons: 'always',
+			customArrowSelectors: {
+				left: false,
+				right: false
+			},
+			showNavButtons: true,
 			autoAdvance: false,
 			pauseOnNav: true,
 			animate: 'horizontal',
