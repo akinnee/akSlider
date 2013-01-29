@@ -16,7 +16,7 @@
     GNU General Public License for more details.
 
     A copy of the GNU General Public License can be found at http://www.gnu.org/licenses/
-    
+
 	*/
 
 	$.fn.akSlider = function(options) {
@@ -82,9 +82,15 @@
 		var initialize = function() {
 			self.addClass('akslider-container');
 			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .akslider-nav-to[data-slide="' + currentSlide + '"]').addClass('akslider-current');
-			self.find('.akslider-nav-back').click(navBack);
-			self.find('.akslider-nav-forward').click(navForward);
 			self.find('.akslider-nav-to').click(navTo);
+
+			self.find('.akslider-nav-back').click(navBack);
+			if (options.customArrowSelectors.back)
+				$(options.customArrowSelectors.back).click(navBack);
+
+			self.find('.akslider-nav-forward').click(navForward);
+			if (options.customArrowSelectors.forward)
+				$(options.customArrowSelectors.forward).click(navForward);
 
 			if (!options.showArrows)
 				self.addClass('akslider-show-arrows-false');
