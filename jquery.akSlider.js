@@ -54,6 +54,7 @@
 		var paused = false;
 
 		var initialize = function() {
+			self.addClass('akslider-container');
 			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .akslider-nav-to[data-slide="' + currentSlide + '"]').addClass('akslider-current');
 			self.find('.akslider-nav-back').click(navBack);
 			self.find('.akslider-nav-forward').click(navForward);
