@@ -69,6 +69,8 @@
 
 			if (!options.showArrows)
 				self.addClass('akslider-show-arrows-false');
+			else if (options.showArrows == 'invisible')
+				self.addClass('akslider-show-arrows-invisible');
 			else if (options.showArrows == 'onhover')
 				self.addClass('akslider-show-arrows-onhover');
 
