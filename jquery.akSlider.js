@@ -20,7 +20,7 @@
 
 		// apply options defaults where option was not specified
 		$.each(optionDefaults, function(key, value) {
-			if (!options.key) options[key] = value;
+			if (typeof options[key] === 'undefined') options[key] = value;
 		});
 
 		var generateMarkup = function() {
