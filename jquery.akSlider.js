@@ -9,10 +9,13 @@
 		var self = this;
 
 		var optionDefaults = {
+			width: 640,
 			showArrows: 'onhover',
 			showNavButtons: 'always',
 			autoAdvance: false,
-			pauseOnNav: true
+			pauseOnNav: true,
+			animate: 'horizontal',
+			animationTime: 250
 		};
 
 		// apply options defaults where option was not specified
@@ -73,13 +76,76 @@
 			var slide = parseInt(self.find('.akslider-slide.akslider-current').attr('data-slide'), 10);
 			if (typeof slide == 'number') currentSlide = slide;
 		};
+		var animateSlides = function(currentSlideElement, nextSlideElement, nextSlide, callback) {
+			if (options.animate) {
+				switch (options.animate) {
+					case 'horizontal':
+						animationHorizontal(currentSlideElement, nextSlideElement, nextSlide, callback);
+						break;
+					default:
+						callback();
+				}
+			} else
+				callback();
+		};
+		var animationHorizontal = function(currentSlideElement, nextSlideElement, nextSlide, callback) {
+
+			var animationComplete = function() {
+				$('.akslider-slide').css({
+					display: '',
+					top: '',
+					right: '',
+					bottom: '',
+					left: ''
+				});
+				callback();
+				return;
+			};
+
+			// TODO: consolidate slide forward and back since they are mostly the same
+			if (currentSlide < nextSlide) {
+				// slide forward
+				nextSlideElement.css({
+					left: options.width,
+					display: 'block'
+				});
+				nextSlideElement.animate({
+					left: 0
+				}, options.animationTime);
+				currentSlideElement.animate({
+					right: options.width
+				}, options.animationTime, animationComplete);
+			} else if (currentSlide > nextSlide) {
+				// slide backward
+				nextSlideElement.css({
+					right: options.width,
+					display: 'block'
+				});
+				nextSlideElement.animate({
+					right: 0
+				}, options.animationTime);
+				currentSlideElement.animate({
+					left: options.width
+				}, options.animationTime, animationComplete);
+			} else {
+				callback();
+				return;
+			}
+		};
 		var navigateTo = function(e, slide) {
 			if (e && options.pauseOnNav)
 				paused = true;
 
-			self.find('.akslider-slide.akslider-current, .akslider-nav-to.akslider-current').removeClass('akslider-current');
-			self.find('.akslider-slide[data-slide="' + slide + '"], .akslider-nav-to[data-slide="' + slide + '"]').addClass('akslider-current');
-			updateCurrentSlide();
+			var currentSlideElement = self.find('.akslider-slide.akslider-current');
+			var nextSlideElement = self.find('.akslider-slide[data-slide="' + slide + '"]');
+
+			animateSlides(currentSlideElement, nextSlideElement, slide, function() {
+				currentSlideElement.removeClass('akslider-current');
+				$('.akslider-nav-to.akslider-current').removeClass('akslider-current');
+				nextSlideElement.addClass('akslider-current');
+				$('.akslider-nav-to[data-slide="' + slide + '"]').addClass('akslider-current');
+				updateCurrentSlide();
+			});
 		};
 		var navBack = function(e) {
 			if (currentSlide == 0)
