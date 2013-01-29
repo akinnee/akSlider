@@ -67,10 +67,14 @@
 			self.find('.akslider-nav-forward').click(navForward);
 			self.find('.akslider-nav-to').click(navTo);
 
-			if (options.showArrows == 'onhover')
+			if (!options.showArrows)
+				self.addClass('akslider-show-arrows-false');
+			else if (options.showArrows == 'onhover')
 				self.addClass('akslider-show-arrows-onhover');
 
-			if (options.showNavButtons == 'onhover')
+			if (!options.showNavButtons)
+				self.addClass('akslider-show-nav-buttons-false');
+			else if (options.showNavButtons == 'onhover')
 				self.addClass('akslider-show-nav-buttons-onhover');
 		};
 		var slideCount = function() {
