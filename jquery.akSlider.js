@@ -185,7 +185,13 @@
 				nextSlideElement.addClass('akslider-current');
 				$('.akslider-nav-to[data-slide="' + slide + '"]').addClass('akslider-current');
 				updateCurrentSlide();
+
+				// events!
+				self.trigger('complete:animation');
 			});
+
+			// events!
+			self.trigger('change:slide', [slide, (slideCount() - 1)]);
 		};
 		var navBack = function(e) {
 			if (currentSlide == 0)
