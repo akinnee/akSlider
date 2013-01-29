@@ -50,7 +50,7 @@
 
 		generateMarkup();
 
-		var currentSlide = 1;
+		var currentSlide = 0;
 		var paused = false;
 
 		var initialize = function() {
@@ -67,7 +67,7 @@
 				self.addClass('akslider-show-nav-buttons-onhover');
 		};
 		var slideCount = function() {
-			return self.find('.akslider-slide').length;
+			return options.slides.length;
 		};
 		var updateCurrentSlide = function() {
 			var slide = parseInt(self.find('.akslider-slide.akslider-current').attr('data-slide'), 10);
@@ -82,14 +82,14 @@
 			updateCurrentSlide();
 		};
 		var navBack = function(e) {
-			if (currentSlide == 1)
-				navigateTo(e, slideCount());
+			if (currentSlide == 0)
+				navigateTo(e, (slideCount() - 1));
 			else
 				navigateTo(e, (currentSlide - 1));
 		};
 		var navForward = function(e) {
-			if (currentSlide == slideCount())
-				navigateTo(e, 1);
+			if (currentSlide == (slideCount() - 1))
+				navigateTo(e, 0);
 			else
 				navigateTo(e, (currentSlide + 1));
 		};

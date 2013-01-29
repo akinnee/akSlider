@@ -36,15 +36,15 @@ Usage Example
 -----
 
 	$('.tutorial-slideshow').akSlider({
-		slides: {
-			1: {
+		slides: [
+			{
 				html: '<div>Any HTML you want!</div>'
 			},
-			2: {
+			{
 				image: '/path/to/image.png'
 			}
-		},
-		showArrows: onhover
+		],
+		showArrows: 'onhover'
 	    // other options here
 	});
 
