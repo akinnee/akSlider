@@ -38,7 +38,10 @@
 			autoAdvance: false,
 			pauseOnNav: true,
 			animate: 'horizontal',
-			animationTime: 250
+			animationTime: 250,
+
+			// initialized callback
+			initialized: function() {}
 		};
 
 		// apply options defaults where option was not specified
@@ -103,6 +106,8 @@
 				self.addClass('akslider-show-nav-buttons-false');
 			else if (options.showNavButtons == 'onhover')
 				self.addClass('akslider-show-nav-buttons-onhover');
+
+			options.initialized();
 		};
 		var slideCount = function() {
 			return options.slides.length;
