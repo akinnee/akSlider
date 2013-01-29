@@ -120,9 +120,11 @@
 		var animateSlides = function(currentSlideElement, nextSlideElement, nextSlide, callback) {
 			if (options.animate) {
 				switch (options.animate) {
+					// TODO: add fade animation
 					case 'horizontal':
 						animationHorizontal(currentSlideElement, nextSlideElement, nextSlide, callback);
 						break;
+					// TODO: add vertical slide animation
 					default:
 						callback();
 				}
@@ -197,7 +199,7 @@
 		var navBack = function(e) {
 			if (currentSlide == 0) {
 				if (options.loop)
-				navigateTo(e, (slideCount() - 1));
+					navigateTo(e, (slideCount() - 1));
 			}
 			else
 				navigateTo(e, (currentSlide - 1));
@@ -205,7 +207,7 @@
 		var navForward = function(e) {
 			if (currentSlide == (slideCount() - 1)) {
 				if (options.loop)
-				navigateTo(e, 0);
+					navigateTo(e, 0);
 			}
 			else
 				navigateTo(e, (currentSlide + 1));
