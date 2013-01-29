@@ -37,6 +37,7 @@
 			showNavButtons: true,
 			autoAdvance: false,
 			pauseOnNav: true,
+			loop: true,
 			animate: 'horizontal',
 			animationTime: 250,
 
@@ -194,14 +195,18 @@
 			self.trigger('change:slide', [slide, (slideCount() - 1)]);
 		};
 		var navBack = function(e) {
-			if (currentSlide == 0)
+			if (currentSlide == 0) {
+				if (options.loop)
 				navigateTo(e, (slideCount() - 1));
+			}
 			else
 				navigateTo(e, (currentSlide - 1));
 		};
 		var navForward = function(e) {
-			if (currentSlide == (slideCount() - 1))
+			if (currentSlide == (slideCount() - 1)) {
+				if (options.loop)
 				navigateTo(e, 0);
+			}
 			else
 				navigateTo(e, (currentSlide + 1));
 		};
