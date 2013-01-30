@@ -197,7 +197,7 @@
 			self.trigger('change:slide', [slide, (slideCount() - 1)]);
 		};
 		var navBack = function(e) {
-			if (currentSlide == 0) {
+			if (currentSlide === 0) {
 				if (options.loop)
 					navigateTo(e, (slideCount() - 1));
 			}
@@ -213,7 +213,7 @@
 				navigateTo(e, (currentSlide + 1));
 		};
 		var navTo = function(e) {
-			navigateTo(e, $(e.target).attr('data-slide'));
+			navigateTo(e, parseInt($(e.target).attr('data-slide'), 10));
 		};
 		var autoAdvance = function() {
 			if (!paused) {
