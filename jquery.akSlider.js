@@ -20,12 +20,10 @@
 	*/
 
 	$.fn.akSlider = function(options) {
+		var self = this;
+
 		if (!options)
 			$.error('Must supply options to akSlider!');
-		if (!options.slides || !$.isArray(options.slides))
-			$.error('Must supply options.slides to akSlider, and it must be an Array!');
-
-		var self = this;
 
 		var optionDefaults = {
 			width: 640,
@@ -44,11 +42,6 @@
 			// initialized callback
 			initialized: function() {}
 		};
-
-		// apply options defaults where option was not specified
-		$.each(optionDefaults, function(key, value) {
-			if (typeof options[key] === 'undefined') options[key] = value;
-		});
 
 		var generateMarkup = function() {
 			var controls = '<div class="akslider-controls">';
@@ -78,12 +71,10 @@
 			});
 		};
 
-		generateMarkup();
-
-		var currentSlide = 0;
-		var paused = false;
-
 		var initialize = function() {
+			currentSlide = 0;
+			paused = false;
+
 			self.addClass('akslider-container');
 			self.find('.akslider-slide[data-slide="' + currentSlide + '"], .akslider-nav-to[data-slide="' + currentSlide + '"]').addClass('akslider-current');
 			self.find('.akslider-nav-to').click(navTo);
@@ -107,6 +98,9 @@
 				self.addClass('akslider-show-nav-buttons-false');
 			else if (options.showNavButtons == 'onhover')
 				self.addClass('akslider-show-nav-buttons-onhover');
+
+			if (options.autoAdvance)
+				window.setTimeout(autoAdvance, options.autoAdvance);
 
 			options.initialized();
 		};
@@ -222,11 +216,37 @@
 			}
 		};
 
+		// TODO: Make this actually work!
+		// support calling methods directly
+		if (typeof options == 'string') {
+			switch (options) {
+				case 'navForward':
+					navForward();
+					break;
+				case 'navBack':
+					navBack();
+					break;
+				default:
+					$.error(options + ' is not a recognized method.');
+			}
+			return self;
+		}
+
+		if (!options.slides || !$.isArray(options.slides))
+			$.error('Must supply options.slides to akSlider, and it must be an Array!');
+
+		// apply options defaults where option was not specified
+		$.each(optionDefaults, function(key, value) {
+			if (typeof options[key] === 'undefined') options[key] = value;
+		});
+
+		var currentSlide;
+		var paused;
+
+		generateMarkup();
 		initialize();
 
-		if (options.autoAdvance)
-			window.setTimeout(autoAdvance, options.autoAdvance);
-
+		return self;
 	};
 
 })( jQuery );
