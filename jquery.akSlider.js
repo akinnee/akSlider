@@ -24,6 +24,8 @@
 
 		if (!options)
 			$.error('Must supply options to akSlider!');
+		if (!options.slides || !$.isArray(options.slides))
+			$.error('Must supply options.slides to akSlider, and it must be an Array!');
 
 		var optionDefaults = {
 			width: 640,
@@ -98,6 +100,10 @@
 				self.addClass('akslider-show-nav-buttons-false');
 			else if (options.showNavButtons == 'onhover')
 				self.addClass('akslider-show-nav-buttons-onhover');
+
+			// support calling methods with events
+			self.on('nav:forward', navForward);
+			self.on('nav:back', navBack);
 
 			if (options.autoAdvance)
 				window.setTimeout(autoAdvance, options.autoAdvance);
@@ -215,25 +221,6 @@
 				window.setTimeout(autoAdvance, options.autoAdvance);
 			}
 		};
-
-		// TODO: Make this actually work!
-		// support calling methods directly
-		if (typeof options == 'string') {
-			switch (options) {
-				case 'navForward':
-					navForward();
-					break;
-				case 'navBack':
-					navBack();
-					break;
-				default:
-					$.error(options + ' is not a recognized method.');
-			}
-			return self;
-		}
-
-		if (!options.slides || !$.isArray(options.slides))
-			$.error('Must supply options.slides to akSlider, and it must be an Array!');
 
 		// apply options defaults where option was not specified
 		$.each(optionDefaults, function(key, value) {
