@@ -74,7 +74,7 @@
 		};
 
 		var initialize = function() {
-			currentSlide = 0;
+			currentSlide = options.startSlide || 0;
 			paused = false;
 
 			self.addClass('akslider-container');
