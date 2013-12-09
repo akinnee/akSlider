@@ -1,9 +1,11 @@
 akSlider
 ========
 
-WORK IN PROGESS!!!
+NOT FINISHED!
 
-Lightweight, object-oriented, jQuery-based slider
+Lightweight jQuery slideshow
+
+This will receive minimal updates/support from now on as it is being superseded by AkCoffeeSlideshow (https://github.com/akinnee/AkCoffeeSlideshow)
 
 Options
 -----
